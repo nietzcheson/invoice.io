@@ -9,29 +9,28 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" media="screen" title="no title" charset="utf-8">
     </head>
     <body>
-      {% for flashMessage in app.session.flashbag.get('mensaje') %}
-        <div class="flash-notice">
-            {{ flashMessage }}
-        </div>
-      {% endfor %}
         <nav class="navbar navbar-default" role="navigation">
           <div class="container-fluid">
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar">
+              <a class="navbar-brand" href="#">InvoiceIO</a>
               <ul class="nav navbar-nav">
-                <li class="active"><a href="/">InvoiceIO</a></li>
-                <li><a href="#"></a></li>
+                <li class="active"><a href="/">Registros</a></li>
+                <li class=""><a href="/">Reportes</a></li>
+                <li class=""><a href="/">Categorias</a></li>
               </ul>
+
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
-        <ul class="nav nav-tabs nav-justified">
-          <li role="presentation" class="active"><a href="#">Registros</a></li>
-          <li role="presentation"><a href="#">Reportes</a></li>
-          <li role="presentation"><a href="#">Categorias</a></li>
-        </ul>
         <div id="content">
+          {% for flashMessage in app.session.flashbag.get('mensaje') %}
+          <div class="alert alert-warning alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <strong>{{ flashMessage }}</strong>
+          </div>
+          {% endfor %}
             <div class="col-md-4">
               {% block side %}
 

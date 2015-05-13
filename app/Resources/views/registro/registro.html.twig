@@ -21,7 +21,30 @@
   <div class="panel panel-default">
 
     <div class="panel-body">
-      
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Ingreso/Gasto</th>
+            <th>Categoria</th>
+            <th>Descripcion</th>
+            <th>Valor</th>
+            <th>Moneda</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for registro in registros %}
+          <tr>
+            <td>{{ registro.creado|date('Y/m/d') }}</td>
+            <td>{{ registro.tiposRegistro.tipoRegistro }}</td>
+            <td>{{ registro.categorias.categoria }}</td>
+            <td>{{ registro.descripcion }}</td>
+            <td>{{ registro.valor }}</td>
+            <td>{{ registro.monedas.moneda }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
 
   </div>

@@ -10,27 +10,39 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/registro")
+ * @Route("/registros")
  */
 
 
 class RegistroController extends Controller
 {
     /**
-     * @Route("", name="registro")
+     * @Route("", name="registros")
      */
     public function registroAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $registros = $em->getRepository('AppBundle:Registros')->findAll();
+
         $registro = new Registros();
         $registroForm = $this->createForm(new RegistrosType(), $registro);
         $registroForm->handleRequest($request);
 
         if($registroForm->isValid()){
+
+          $em->persist($registro);
+          $em->flush();
+
           $this->get('session')->getFlashBag()->add('mensaje', 'Registro creado');
+
+          return $this->redirect($this->generateUrl('registros'));
+
         }
 
         return $this->render('registro/registro.html.twig', array(
-          'registro_form' => $registroForm->createView()
+          'registro_form' => $registroForm->createView(),
+          'registros'     => $registros
         ));
     }
 }
