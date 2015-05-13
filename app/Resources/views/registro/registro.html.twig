@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<ul class="list-group">
+  <a class="list-group-item">Registro</a>
+  <a class="list-group-item">Reportes</a>
+  <a class="list-group-item">Categorías</a>
+</ul>
+
+<form class="form" action="" method="post">
+  {{ form_widget(registro_form) }}
+  <button type="submit" class="btn btn-default">
+    Nuevo registro
+  </button>
+</form>
+
+{% endblock %}

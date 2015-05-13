@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<a href="{{ path('categorias_crear') }}" class="btn btn-default">
+  Crear categoría
+</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        #
+      </th>
+      <th>
+        Categoria
+      </th>
+      <th>
+        Tipo
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for categoria in categorias %}
+    <tr>
+      <td>
+        {{ categoria.id }}
+      </td>
+      <td>
+        {{ categoria.categoria }}
+      </td>
+      <td>
+        {{ categoria.tiposRegistro.tipoRegistro }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
