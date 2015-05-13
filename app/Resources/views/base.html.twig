@@ -5,6 +5,8 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}" media="screen" title="no title" charset="utf-8">
     </head>
     <body>
       {% for flashMessage in app.session.flashbag.get('mensaje') %}
@@ -12,9 +14,42 @@
             {{ flashMessage }}
         </div>
       {% endfor %}
-        {% block body %}{% endblock %}
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="container-fluid">
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/">InvoiceIO</a></li>
+                <li><a href="#"></a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+        <ul class="nav nav-tabs nav-justified">
+          <li role="presentation" class="active"><a href="#">Registros</a></li>
+          <li role="presentation"><a href="#">Reportes</a></li>
+          <li role="presentation"><a href="#">Categorias</a></li>
+        </ul>
+        <div id="content">
+            <div class="col-md-4">
+              {% block side %}
+
+              {% endblock %}
+            </div>
+
+
+            <div class="col-md-8">
+              {% block contenido %}
+
+              {% endblock %}
+            </div>
+        </div>
+
+
         {% block javascripts %}{% endblock %}
         <script charset="utf-8" src="{{ asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+        <script charset="utf-8" src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <script charset="utf-8" src="{{ asset('js/funciones.js')}}"></script>
 
     </body>
