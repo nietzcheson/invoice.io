@@ -30,7 +30,6 @@ class RegistroController extends Controller
         $registroForm->handleRequest($request);
 
         if($registroForm->isValid()){
-
           $em->persist($registro);
           $em->flush();
 

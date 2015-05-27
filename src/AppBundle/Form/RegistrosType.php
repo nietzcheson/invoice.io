@@ -22,14 +22,15 @@ class RegistrosType extends AbstractType
             ->add('tiposRegistro', 'entity', array(
               'class'       => 'AppBundle:TiposRegistro',
               'property'    => 'tipoRegistro',
-              'empty_value' => 'Seleccione'
+              'empty_value' => 'Seleccione',
+              'label'       => 'Registro'
             ))
             ->add('categorias', 'entity', array(
               'class'       => 'AppBundle:Categorias',
               'property'    => 'categoria',
-              'empty_value' => 'Seleccione'
+              'empty_value' => 'Seleccione',
             ))
-            ->add('descripcion')
+            ->add('descripcion','textarea')
             ->add('valor')
             ->add('monedas', 'entity', array(
               'class'       => 'AppBundle:Monedas',
