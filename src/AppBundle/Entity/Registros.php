@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Registros
@@ -38,6 +39,7 @@ class Registros
     /**
      * @ORM\ManyToOne(targetEntity="TiposRegistro", inversedBy="registros")
      * @ORM\JoinColumn(name="tipo_registro_id", referencedColumnName="id")
+     * @Assert\NotBlank(message="Seleccione un tipo de registro")
      */
 
     private $tiposRegistro;
@@ -45,6 +47,7 @@ class Registros
     /**
      * @ORM\ManyToOne(targetEntity="Categorias", inversedBy="registros")
      * @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
+     * @Assert\NotBlank(message="Seleccione una categoría")
      */
 
     private $categorias;
@@ -53,6 +56,7 @@ class Registros
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=255)
+     * @Assert\NotBlank(message="La descripción es importante para recordar la importancia del registro")
      */
     private $descripcion;
 
@@ -62,12 +66,6 @@ class Registros
      * @ORM\Column(name="valor", type="float")
      */
     private $valor;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Monedas", inversedBy="registros")
-     * @ORM\JoinColumn(name="monedas_id", referencedColumnName="id")
-     */
-    private $monedas;
 
     public function __construct()
     {
@@ -223,28 +221,5 @@ class Registros
     public function getTiposRegistro()
     {
         return $this->tiposRegistro;
-    }
-
-    /**
-     * Set monedas
-     *
-     * @param \AppBundle\Entity\Monedas $monedas
-     * @return Registros
-     */
-    public function setMonedas(\AppBundle\Entity\Monedas $monedas = null)
-    {
-        $this->monedas = $monedas;
-
-        return $this;
-    }
-
-    /**
-     * Get monedas
-     *
-     * @return \AppBundle\Entity\Monedas 
-     */
-    public function getMonedas()
-    {
-        return $this->monedas;
     }
 }

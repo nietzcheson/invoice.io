@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}InvoiceIO{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" media="screen" title="no title" charset="utf-8">
@@ -25,20 +25,22 @@
           </div><!-- /.container-fluid -->
         </nav>
         <div id="content">
-          {% for flashMessage in app.session.flashbag.get('mensaje') %}
-          <div class="alert alert-warning alert-dismissible fade in" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <strong>{{ flashMessage }}</strong>
-          </div>
-          {% endfor %}
+
             <div class="col-md-3">
               {% block side %}
 
               {% endblock %}
             </div>
-
-
             <div class="col-md-9">
+              <!-- <div class="registro-form">
+                Acá va el form
+              </div> -->
+              {% for flashMessage in app.session.flashbag.get('mensaje') %}
+              <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <strong>{{ flashMessage }}</strong>
+              </div>
+              {% endfor %}
               {% block contenido %}
 
               {% endblock %}
@@ -49,6 +51,10 @@
         {% block javascripts %}{% endblock %}
         <script charset="utf-8" src="{{ asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
         <script charset="utf-8" src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
         <script charset="utf-8" src="{{ asset('js/funciones.js')}}"></script>
 
     </body>

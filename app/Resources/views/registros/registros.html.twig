@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+
+  {% block side %}
+  <div class="panel panel-default">
+
+    <div class="panel-body">
+      <form class="form" action method="post" novalidate="novalidate" id="ElForm">
+        {{ form_widget(registro_form) }}
+        <button type="submit" class="btn btn-default">
+          Registrar
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  {% endblock %}
+
+  {% block contenido %}
+  <div class="panel panel-default">
+
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Tipo de registro</th>
+            <th>Categoría</th>
+            <th>Descripción</th>
+            <th>Valor</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for registro in registros %}
+          <tr>
+            <td>{{ registro.creado|date('Y/m/d') }}</td>
+            <td>{{ registro.tiposRegistro.tipoRegistro }}</td>
+            <td>{{ registro.categorias.categoria }}</td>
+            <td>{{ registro.descripcion }}</td>
+            <td>{% if registro.tiposRegistro.id == 1 %} - {% else %} + {% endif %} {{ registro.valor }}</td>
+            <td class="text-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default editar-registro" id="{{ registro.id }}" data-toggle="modal" data-target=".bs-example-modal-sm">
+                  <span class="glyphicon glyphicon-edit"></span>
+                </button>
+                <button type="button" class="btn btn-default">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="4">
+            </th>
+            <th>
+              Total
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content ">
+      <div class="row">
+        <div class="col-md-12 registro-form">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  {% endblock %}

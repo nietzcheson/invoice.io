@@ -5,7 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use AppBundle\Form\Listener\AddCategoriasFieldSubscriber;
+use AppBundle\Form\EventListener\AddCategoriasFieldSubscriber;
 
 class RegistrosType extends AbstractType
 {
@@ -28,20 +28,16 @@ class RegistrosType extends AbstractType
             ->add('categorias', 'entity', array(
               'class'       => 'AppBundle:Categorias',
               'property'    => 'categoria',
-              'empty_value' => 'Seleccione',
+              'empty_value' => 'Seleccione el Registro',
+              'attr' => array(
+                'disabled' => true
+              ),
+              'label' => 'Categoría'
             ))
-            ->add('descripcion','textarea')
             ->add('valor')
-            ->add('monedas', 'entity', array(
-              'class'       => 'AppBundle:Monedas',
-              'property'    => 'moneda',
-              'empty_value' => 'Seleccione'
-            ))
+            ->add('descripcion','textarea')
         ;
 
-        // Añadimos un EventListener que actualizará el campo state
-        // para que sus opciones correspondan
-        // con el pais seleccionado por el usuario
         $builder->addEventSubscriber(new AddCategoriasFieldSubscriber());
     }
 

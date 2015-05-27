@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Form\Listener;
+namespace AppBundle\Form\EventListener;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
@@ -28,11 +28,13 @@ class AddCategoriasFieldSubscriber implements EventSubscriberInterface
     {
         $form->add('categorias', 'entity', array(
           'class' => 'AppBundle:Categorias',
+          'property'    => 'categoria',
           'query_builder' => function(EntityRepository $er) use ($tipo){
             return $er->createQueryBuilder('c')
               ->where('c.tiposRegistro = :tipo')
               ->setParameter('tipo', $tipo);
-          }
+          },
+          'empty_value' => 'Seleccione'
         ));
     }
 }
